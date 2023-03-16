@@ -10,7 +10,7 @@
 int main(void)
 {
 	/*printing using puts*/
-	char Mystr[] = "\"Programming is like building a multilingual puzzle"
+	char Mystr[] = "\"Programming is like building a multilingual puzzle";
 
 	puts(Mystr); /*Writing the string to stdout*/
 
