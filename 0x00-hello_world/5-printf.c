@@ -9,9 +9,7 @@
 int main(void)
 {
 	/*printing using printf*/
-	char Exctly[] = "with proper grammar, but the outcome is a piece of art,";
-
-	printf(Exctly \n); /*Writing the string to the stdout*/
+	printf("with proper grammar, but the outcome is a piece of art,\n";
 
 	return (0);
 }
