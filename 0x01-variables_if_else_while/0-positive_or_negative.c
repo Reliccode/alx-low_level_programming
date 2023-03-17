@@ -1,13 +1,15 @@
 #include <stdlib.h>
 #include <time.h>
+
 /**
  * main - Entry point
- * the program use if, else, else if
- * Return: Always 0 (success)
+ * Description: 'the program's description'
+ * parameter: Program prints a line using puts function
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int n = 4;
+	int n;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
@@ -22,7 +24,7 @@ int main(void)
 	}
 	else
 	{
-		printf("d% is negative\n", n);
+		printf("%d is negative\n", n);
 	}
 	return (0);
 }
