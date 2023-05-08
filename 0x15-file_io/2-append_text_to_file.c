@@ -4,7 +4,8 @@
  * append_text_to_file - appends text at end of file
  * @filename: name of the file.
  *
- * Return: 1 if file exists. -1 on fail.
+ * Return: 1 if file exists. -1 on fail
+ * if filename is NULL return -1
  * Written by Naniwet Maritim
  */
 int append_text_to_file(const char *filename, char *text_content)
