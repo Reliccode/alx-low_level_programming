@@ -7,53 +7,52 @@
 #include <elf.h>
 
 /**
- * print_addr - prints address
+ * print_addr - it prints address
  * @ptr: 
  * Return: no return.
  */
-void print_addr(char *ptr)
-{
-	int i;
-	int begin;
-	char sys;
+void print_addr(char *ptr) {
+    int i;
+    int begin;
+    char sys;
 
-	printf("Entry point address:0x");
+    printf("  Entry point address:               0x");
 
-	sys = ptr[4] + '0';
-	if (sys == '1')
-	{
-		begin = 26;
-		printf("80");
-		for (i = begin; i >= 22; i--)
-		{
-			if (ptr[i] > 0)
-				printf("%x", ptr[i]);
-			else if (ptr[i] < 0)
-				printf("%x", 256 + ptr[i]);
-		}
-		if (ptr[7] == 6)
-			printf("00");
-	}
+    sys = ptr[4] + '0';
 
-	if (sys == '2')
-	{
-		begin = 26;
-		for (i = begin; i > 23; i--)
-		{
-			if (ptr[i] >= 0)
-				printf("%02x", ptr[i]);
+    if (sys == '1') {
+        begin = 26;
+        printf("80");
 
-			else if (ptr[i] < 0)
-				printf("%02x", 256 + ptr[i]);
+        for (i = begin; i >= 22; i--) {
+            if (ptr[i] > 0)
+                printf("%x", ptr[i]);
+            else if (ptr[i] < 0)
+                printf("%x", 256 + ptr[i]);
+        }
 
-		}
-	}
-	printf("\n");
+        if (ptr[7] == 6)
+            printf("00");
+    }
+
+    if (sys == '2') {
+        begin = 26;
+
+        for (i = begin; i > 23; i--) {
+            if (ptr[i] >= 0)
+                printf("%02x", ptr[i]);
+            else if (ptr[i] < 0)
+                printf("%02x", 256 + ptr[i]);
+        }
+    }
+
+    printf("\n");
 }
+
 
 /**
  * print_type - it prints type
- * @ptr:
+ * @ptr: 
  * Return: no return.
  */
 void print_type(char *ptr)
@@ -65,7 +64,7 @@ void print_type(char *ptr)
 	else
 		type = ptr[17];
 
-	printf("Type: ");
+	printf("  Type:                              ");
 	if (type == 0)
 		printf("NONE (No file type)\n");
 	else if (type == 1)
@@ -82,7 +81,7 @@ void print_type(char *ptr)
 
 /**
  * print_osabi - it prints osabi
- * @ptr:
+ * @ptr: 
  * Return: no return.
  */
 void print_osabi(char *ptr)
@@ -99,7 +98,7 @@ void print_osabi(char *ptr)
 	else
 		printf("<unknown: %x>\n", osabi);
 
-	printf("ABI Version: %d\n", ptr[8]);
+	printf("  ABI Version:                       %d\n", ptr[8]);
 }
 
 
@@ -112,7 +111,7 @@ void print_version(char *ptr)
 {
 	int version = ptr[6];
 
-	printf("Version: %d", version);
+	printf("  Version:                           %d", version);
 
 	if (version == EV_CURRENT)
 		printf(" (current)");
@@ -128,7 +127,7 @@ void print_data(char *ptr)
 {
 	char data = ptr[5];
 
-	printf("Data: 2's complement");
+	printf("  Data:                              2's complement");
 	if (data == 1)
 		printf(", little endian\n");
 
@@ -154,7 +153,7 @@ void print_magic(char *ptr)
 }
 
 /**
- * check_sys - Look Up system version.
+ * check_sys - Look up system version.
  * @ptr: 
  * Return: no return.
  */
@@ -169,10 +168,10 @@ void check_sys(char *ptr)
 	print_magic(ptr);
 
 	if (sys == '1')
-		printf("Class: ELF32\n");
+		printf("  Class:                             ELF32\n");
 
 	if (sys == '2')
-		printf("Class: ELF64\n");
+		printf("  Class:                             ELF64\n");
 
 	print_data(ptr);
 	print_version(ptr);
@@ -182,9 +181,9 @@ void check_sys(char *ptr)
 }
 
 /**
- * check_elf - check for elf file.
- * @ptr
- * Return: 1 if elf file. 0 if not.
+ * check_elf - check if elf file.
+ * @ptr: 
+ * Return: 1 if it is an elf file. 0 if not.
  */
 int check_elf(char *ptr)
 {
@@ -200,7 +199,7 @@ int check_elf(char *ptr)
 }
 
 /**
- * main - check the code.
+ * main - check the code for "DO HARD THINGS".
  * @argc: num of arguments.
  * @argv: arguments vector.
  * Return: Always 0.
@@ -220,7 +219,7 @@ int main(int argc, char *argv[])
 
 	if (fd < 0)
 	{
-		dprintf(STDERR_FILENO, "Err: file cannot be opened\n");
+		dprintf(STDERR_FILENO, "Err: file can not be open\n");
 		exit(98);
 	}
 
@@ -229,13 +228,13 @@ int main(int argc, char *argv[])
 
 	if (ret_read == -1)
 	{
-		dprintf(STDERR_FILENO, "Err: file cannot be read\n");
+		dprintf(STDERR_FILENO, "Err: The file can not be read\n");
 		exit(98);
 	}
 
 	if (!check_elf(ptr))
 	{
-		dprintf(STDERR_FILENO, "Err: Not an ELF\n");
+		dprintf(STDERR_FILENO, "Err: It is not an ELF\n");
 		exit(98);
 	}
 
@@ -243,4 +242,4 @@ int main(int argc, char *argv[])
 	close(fd);
 
 	return (0);
-}
+}                                                                                
